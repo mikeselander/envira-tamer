@@ -4,16 +4,24 @@ Plugin Name: Envira Tamer
 Plugin URI: http://wordpress.org/plugins/envira-tamer/
 Description: Control which post types Envira Gallery meta box field shows up on
 Author: Mike Selander
-Version: 1.0
+Version: 1.0.1
 Author URI: http://www.mikeselander.com/
+License: GPLv2 or later
 */
 
-// Load the settings page if we're in the admin section
+/*
+ * Load the settings page if we're in the admin section
+ */
 if ( is_admin() ){
 	require_once( 'admin/settings-page.php' );
 	$settings = new EnviraTamerSettingsPage( __FILE__ );
 }
 
+/*
+ * Apply our settings to Envira to restrict the post types.
+ *
+ * @see envira_gallery_skipped_posttypes, get_option
+ */
 add_filter( 'envira_gallery_skipped_posttypes', 'restrict_envira_post_types' );
 function restrict_envira_post_types( $rejects ){
 
